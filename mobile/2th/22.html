@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -116,3 +116,66 @@ footer {
 
 </body>
 </html>
+--->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미디어 쿼리 예제</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding-top: 30px;
+}
+
+/* 500px 이하 → 연두색 */
+@media (max-width: 500px) {
+  body {
+    background-color: lightgreen;
+  }
+}
+
+/* 501px ~ 720px → 노란색 */
+@media (min-width: 501px) and (max-width: 720px) {
+  body {
+    background-color: yellow;
+  }
+}
+
+/* 721px 이상 → 보라색 */
+@media (min-width: 721px) {
+  body {
+    background-color: violet;
+  }
+}
+
+h1 {
+  font-size: 50px;
+}
+
+p {
+  font-size: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>미디어 쿼리</h1>
+<p>반응형 웹에 대한 예</p>
+
+</body>
+</html>
+
