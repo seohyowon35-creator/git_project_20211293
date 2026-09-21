@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Semantic Tag Layout</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+}
+
+header {
+    height: 60px;
+    background: #2f5d34;
+    color: white;
+    padding: 20px;
+}
+
+nav {
+    height: 40px;
+    background: #7aa33a;
+    padding: 10px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;   /* 줄바꿈 금지 */
+}
+
+section {
+    flex: 1;
+    padding: 15px;
+    background: #d8e8d0;
+}
+
+article {
+    margin-bottom: 15px;
+    background: #b7d6e8;
+    padding: 10px;
+}
+
+aside {
+    width: 200px;
+    min-width: 200px;    /* 최소 크기 유지 */
+    flex-shrink: 0;      /* 줄어들지 않음 */
+    background: #b8c8dd;
+    padding: 15px;
+}
+
+footer {
+    height: 50px;
+    background: #2f5d34;
+    color: white;
+    padding: 15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    Header 영역
+</header>
+
+<nav>
+    Nav 영역
+</nav>
+
+
+<div class="container">
+
+    <section>
+        <h3>Section1 영역</h3>
+        <p>
+        section 태그는 문서의 내용을 주제별로 나누는 영역입니다.
+        웹 문서의 구조를 명확하게 표현하기 위해 사용합니다.
+        </p>
+
+        <h3>Section2 영역</h3>
+        <p>
+        여러 개의 콘텐츠를 포함할 수 있습니다.
+        </p>
+
+        <article>
+            <h3>Article1 영역</h3>
+            <p>
+            article 태그는 독립적인 콘텐츠 영역입니다.
+            </p>
+        </article>
+
+    </section>
+
+
+    <aside>
+        <h3>Aside 영역</h3>
+        <p>
+        aside는 본문과 관련된 부가 정보를 표시합니다.
+        오른쪽에 고정됩니다.
+        </p>
+    </aside>
+
+</div>
+
+
+<footer>
+    Footer 영역
+</footer>
+
+
+</body>
+</html>
