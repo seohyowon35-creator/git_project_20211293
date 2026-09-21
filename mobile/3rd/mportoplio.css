@@ -1,0 +1,203 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+:root {
+  --ink: #16233b;
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --accent: #3b5bdb;
+  --muted: #6b7688;
+  --line: #d9dee7;
+  --radius: 10px;
+  --max: 960px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* 헤더 · 내비게이션 */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.site-header .inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.logo { font-weight: 800; font-size: 1.15rem; color: var(--ink); }
+.logo:hover { text-decoration: none; }
+
+.nav { display: flex; gap: 4px; list-style: none; flex-wrap: wrap; }
+.nav a {
+  display: block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.nav a:hover { color: var(--ink); background: var(--bg); text-decoration: none; }
+.nav a.active { color: #fff; background: var(--ink); }
+
+/* 본문 */
+main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+
+.page-title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+.lead { color: var(--muted); font-size: 1.1rem; max-width: 60ch; margin-bottom: 48px; }
+
+section { margin-bottom: 56px; }
+h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--ink);
+}
+h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+p { max-width: 68ch; }
+p + p { margin-top: 12px; }
+
+/* 소개 히어로 */
+.hero {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 64px;
+}
+.avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 3.5rem;
+  font-weight: 800;
+}
+.hero .name {
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.hero .role { color: var(--muted); font-size: 1.15rem; margin-top: 8px; }
+
+/* 버튼 */
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+}
+.btn:hover { background: var(--ink); color: #fff; text-decoration: none; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+
+/* 정보 표 */
+.info-table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: var(--radius); overflow: hidden; }
+.info-table th, .info-table td { padding: 14px 20px; text-align: left; border-bottom: 1px solid var(--line); }
+.info-table tr:last-child th, .info-table tr:last-child td { border-bottom: none; }
+.info-table th { width: 160px; color: var(--muted); font-weight: 500; background: #f8f9fc; }
+
+/* 태그 */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.tags li {
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  font-size: 0.92rem;
+}
+
+.skill-group { display: grid; grid-template-columns: 140px 1fr; gap: 12px 24px; align-items: start; }
+.skill-group dt { font-weight: 600; padding-top: 4px; }
+
+/* 목록형 항목 (프로젝트/과목) */
+.entry {
+  background: var(--surface);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 24px 28px;
+}
+.entry + .entry { margin-top: 16px; }
+.entry .meta { color: var(--muted); font-size: 0.92rem; margin-bottom: 10px; }
+.entry ul { padding-left: 20px; margin-top: 8px; }
+.entry .tags { margin-top: 14px; }
+.entry .tags li { background: var(--bg); border-color: transparent; font-size: 0.85rem; }
+
+/* 타임라인 (학기 순서) */
+.timeline { list-style: none; border-left: 2px solid var(--line); margin-left: 8px; }
+.timeline li { position: relative; padding: 0 0 28px 28px; }
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 7px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+}
+.timeline li:last-child { padding-bottom: 0; }
+.timeline .when { color: var(--accent); font-weight: 700; font-size: 0.95rem; }
+
+/* 푸터 */
+.site-footer {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 24px;
+}
+
+/* 반응형 */
+@media (max-width: 640px) {
+  main { padding: 40px 20px 64px; }
+  .hero { grid-template-columns: 1fr; gap: 24px; }
+  .avatar { width: 112px; height: 112px; font-size: 2.5rem; }
+  .info-table th { width: 110px; }
+  .info-table th, .info-table td { padding: 12px 14px; }
+  .skill-group { grid-template-columns: 1fr; gap: 6px; }
+  .skill-group dd { margin-bottom: 12px; }
+  .entry { padding: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
