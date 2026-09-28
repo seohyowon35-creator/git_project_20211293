@@ -159,6 +159,7 @@ p + p { margin-top: 12px; }
 .entry ul { padding-left: 20px; margin-top: 8px; }
 .entry .tags { margin-top: 14px; }
 .entry .tags li { background: var(--bg); border-color: transparent; font-size: 0.85rem; }
+.entry-img { display: block; width: 100%; height: auto; border-radius: 8px; margin-bottom: 16px; }
 
 /* 타임라인 (학기 순서) */
 .timeline { list-style: none; border-left: 2px solid var(--line); margin-left: 8px; }
