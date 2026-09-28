@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>정보 | 효원 포트폴리오</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="mportoplio.css">
 </head>
 <body>
@@ -19,6 +20,7 @@
           <li><a href="idea.html">아이디어</a></li>
           <li><a href="sns.html">SNS</a></li>
           <li><a href="map.html">지도</a></li>
+          <li><a href="memo.html">메모장</a></li>
         </ul>
       </nav>
     </div>
@@ -58,5 +60,45 @@
   <footer class="site-footer">
     &copy; 2026 효원. All rights reserved.
   </footer>
+
+  <!-- 배경음악 -->
+  <audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop preload="none"></audio>
+  <button type="button" id="bgm-btn" class="bgm-btn" onclick="toggleBgm()">♪ 음악 켜기</button>
+  <script>
+    (function () {
+      var audio = document.getElementById('bgm');
+      var btn = document.getElementById('bgm-btn');
+
+      function paint() {
+        btn.textContent = audio.paused ? '♪ 음악 켜기' : '♪ 음악 끄기';
+      }
+
+      function remember(value) {
+        try { localStorage.setItem('bgm', value); } catch (e) {}
+      }
+
+      window.toggleBgm = function () {
+        if (audio.paused) {
+          audio.play();
+          remember('on');
+        } else {
+          audio.pause();
+          remember('off');
+        }
+      };
+
+      audio.addEventListener('play', paint);
+      audio.addEventListener('pause', paint);
+
+      // 다른 페이지로 넘어가도 켜둔 상태를 이어서 재생한다
+      try {
+        if (localStorage.getItem('bgm') === 'on') {
+          audio.play().catch(function () {});
+        }
+      } catch (e) {}
+
+      paint();
+    })();
+  </script>
 </body>
 </html>
