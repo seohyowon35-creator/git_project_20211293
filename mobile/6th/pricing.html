@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>가격 | 플레이트 PT 스튜디오</title>
+  <meta name="description" content="PT 횟수별 이용 요금.">
+
+  <!-- 파비콘 -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- 글꼴 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+
+  <!-- 사이트 스타일 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <!-- ===== 머리글 ===== -->
+  <header class="topbar" id="top">
+    <div class="wrap topbar__in">
+      <a class="logo" href="index.html" aria-label="처음 화면으로">
+        <img src="favicon.svg" alt="" width="34" height="34">
+        <span class="logo__name" data-site="short">PLATE PT</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="주 메뉴">
+        <a href="programs.html">프로그램</a>
+        <a href="trainers.html">트레이너</a>
+        <a href="equipment.html">기구</a>
+        <a href="pricing.html">가격</a>
+        <a href="booking.html">예약</a>
+        <a href="location.html">오시는 길</a>
+        <a href="board.html">게시판</a>
+      </nav>
+      <div class="topbar__tools">
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 밝기 바꾸기">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+        </button>
+        <a class="btn btn--accent btn--sm hide-sm" href="booking.html" data-hover="24시간 상담" data-hover-photo="random">상담 예약</a>
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" data-photo="pricing">
+      <div class="page-hero__photo" aria-hidden="true"></div>
+      <div class="wrap page-hero__in">
+        <nav class="crumbs" aria-label="현재 위치"><a href="index.html">처음</a><span aria-hidden="true">/</span><span>가격</span></nav>
+        <h1 class="page-hero__title">PT 이용 요금</h1>
+      </div>
+    </section>
+
+    <!-- ===== 가격 ===== -->
+    <section class="section section--alt" id="pricing">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="section__lead">모든 PT에는 헬스장 이용권이 포함됩니다. 부가세 포함 가격입니다.</p>
+        </header>
+        <div class="table-scroll">
+          <table class="price-table" id="priceTable">
+            <thead>
+              <tr><th scope="col">횟수</th><th scope="col">기간</th><th scope="col">회당</th><th scope="col">총액</th><th scope="col"></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="note">헬스장만 이용: 1개월 <span class="mono" data-site="gymMonthly">70,000원</span> · 3개월 <span class="mono" data-site="gym3Month">180,000원</span></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== 바닥글 ===== -->
+  <footer class="footer">
+    <div class="wrap footer__in">
+      <div>
+        <strong data-site="name">플레이트 PT 스튜디오</strong>
+        <p class="small muted"><span data-site="address"></span><br>대표전화 <span class="mono" data-site="phone"></span></p>
+      </div>
+      <p class="small muted">© <span id="year"></span> <span data-site="name"></span><br>사진: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- 스크립트: 설정 → 공통 → 이 페이지 기능 -->
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/mouse.js"></script>
+</body>
+</html>

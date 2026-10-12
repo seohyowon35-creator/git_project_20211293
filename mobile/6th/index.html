@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>플레이트 PT 스튜디오</title>
+  <meta name="description" content="1:1 퍼스널 트레이닝, 기구 사용법 지도, 체형 교정과 근력 프로그램. 상담 예약과 오시는 길 안내.">
+
+  <!-- 파비콘 -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- 글꼴 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+
+  <!-- 사이트 스타일 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <!-- ===== 머리글 ===== -->
+  <header class="topbar" id="top">
+    <div class="wrap topbar__in">
+      <a class="logo" href="index.html" aria-label="처음 화면으로">
+        <img src="favicon.svg" alt="" width="34" height="34">
+        <span class="logo__name" data-site="short">PLATE PT</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="주 메뉴">
+        <a href="programs.html">프로그램</a>
+        <a href="trainers.html">트레이너</a>
+        <a href="equipment.html">기구</a>
+        <a href="pricing.html">가격</a>
+        <a href="booking.html">예약</a>
+        <a href="location.html">오시는 길</a>
+        <a href="board.html">게시판</a>
+      </nav>
+      <div class="topbar__tools">
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 밝기 바꾸기">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+        </button>
+        <a class="btn btn--accent btn--sm hide-sm" href="booking.html" data-hover="24시간 상담" data-hover-photo="random">상담 예약</a>
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===== 첫 화면 ===== -->
+    <section class="hero" id="hero">
+      <div class="hero__photo" id="heroPhoto" role="img" aria-label="체육관에서 바벨 컬을 하는 근육질 남성"></div>
+      <div class="wrap hero__in">
+        <div class="hero__copy">
+          <p class="eyebrow">1:1 퍼스널 트레이닝 · 기구 사용법 지도</p>
+          <h1 class="hero__title">무게는 정확하게,<br>몸은 꾸준하게.</h1>
+          <p class="hero__lead">처음 잡는 바벨부터 바디프로필까지. 첫 수업에서 체성분과 움직임을 측정하고, 그 숫자로 12주 계획을 세웁니다.</p>
+          <div class="hero__cta">
+            <a class="btn btn--accent" href="booking.html" data-hover="24시간 상담" data-hover-photo="random">무료 상담 예약</a>
+            <a class="btn btn--ghost" href="location.html">오시는 길</a>
+          </div>
+          <dl class="hero__facts">
+            <div><dt>운영</dt><dd data-site="hoursShort">평일 06–23시</dd></div>
+            <div><dt>수업</dt><dd>1회 50분</dd></div>
+            <div><dt>첫 상담</dt><dd>무료 · 30분</dd></div>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 바로가기 ===== -->
+    <section class="section">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow">둘러보기</p>
+          <h2>무엇을 찾으세요?</h2>
+        </header>
+        <div class="quick" id="quickLinks">
+          <a class="quick__card" href="programs.html"><strong>프로그램</strong><span class="muted small">근력 · 바디프로필 · 다이어트 · 체형 교정</span><span class="quick__go" aria-hidden="true">→</span></a>
+          <a class="quick__card" href="trainers.html"><strong>트레이너</strong><span class="muted small">담당 트레이너와 수업 요일</span><span class="quick__go" aria-hidden="true">→</span></a>
+          <a class="quick__card" href="pricing.html"><strong>가격</strong><span class="muted small">10회부터 50회까지 회당 요금</span><span class="quick__go" aria-hidden="true">→</span></a>
+          <a class="quick__card" href="booking.html"><strong>예약</strong><span class="muted small">무료 상담 · 체험 수업</span><span class="quick__go" aria-hidden="true">→</span></a>
+          <a class="quick__card" href="location.html"><strong>오시는 길</strong><span class="muted small">내 위치에서 길찾기 · 연락처</span><span class="quick__go" aria-hidden="true">→</span></a>
+          <a class="quick__card" href="board.html"><strong>게시판</strong><span class="muted small">질문 · 후기 · 공지</span><span class="quick__go" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 센터 분위기 (사진) ===== -->
+    <section class="gallery-sec" aria-labelledby="galleryTitle">
+      <div class="wrap">
+        <header class="section__head section__head--row">
+          <div>
+            <p class="eyebrow">센터 분위기</p>
+            <h2 id="galleryTitle">땀 흘리는 시간</h2>
+          </div>
+        </header>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </section>
+
+    <!-- ===== 사진 띠 ===== -->
+    <section class="band" id="band">
+      <div class="band__photo" id="bandPhoto" aria-hidden="true"></div>
+      <div class="wrap band__in">
+        <p class="band__quote">오늘 든 무게가<br>다음 달의 몸을 만듭니다.</p>
+        <a class="btn btn--accent" href="booking.html">첫 상담 무료로 받기</a>
+      </div>
+    </section>
+
+    <!-- ===== 자주 묻는 질문 ===== -->
+    <section class="section" id="faq">
+      <div class="wrap wrap--narrow">
+        <header class="section__head">
+          <p class="eyebrow">자주 묻는 질문</p>
+          <h2>등록 전에 많이 묻는 것</h2>
+        </header>
+        <div class="faq" id="faqList"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== 바닥글 ===== -->
+  <footer class="footer">
+    <div class="wrap footer__in">
+      <div>
+        <strong data-site="name">플레이트 PT 스튜디오</strong>
+        <p class="small muted"><span data-site="address"></span><br>대표전화 <span class="mono" data-site="phone"></span></p>
+      </div>
+      <p class="small muted">© <span id="year"></span> <span data-site="name"></span><br>사진: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- 스크립트: 설정 → 공통 → 이 페이지 기능 -->
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/mouse.js"></script>
+</body>
+</html>

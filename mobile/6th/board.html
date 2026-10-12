@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>게시판 | 플레이트 PT 스튜디오</title>
+  <meta name="description" content="회원 소통 게시판.">
+
+  <!-- 파비콘 -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- 글꼴 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+
+  <!-- 사이트 스타일 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <!-- ===== 머리글 ===== -->
+  <header class="topbar" id="top">
+    <div class="wrap topbar__in">
+      <a class="logo" href="index.html" aria-label="처음 화면으로">
+        <img src="favicon.svg" alt="" width="34" height="34">
+        <span class="logo__name" data-site="short">PLATE PT</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="주 메뉴">
+        <a href="programs.html">프로그램</a>
+        <a href="trainers.html">트레이너</a>
+        <a href="equipment.html">기구</a>
+        <a href="pricing.html">가격</a>
+        <a href="booking.html">예약</a>
+        <a href="location.html">오시는 길</a>
+        <a href="board.html">게시판</a>
+      </nav>
+      <div class="topbar__tools">
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 밝기 바꾸기">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+        </button>
+        <a class="btn btn--accent btn--sm hide-sm" href="booking.html" data-hover="24시간 상담" data-hover-photo="random">상담 예약</a>
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" data-photo="board">
+      <div class="page-hero__photo" aria-hidden="true"></div>
+      <div class="wrap page-hero__in">
+        <nav class="crumbs" aria-label="현재 위치"><a href="index.html">처음</a><span aria-hidden="true">/</span><span>소통 게시판</span></nav>
+        <h1 class="page-hero__title">회원 게시판</h1>
+      </div>
+    </section>
+
+    <!-- ===== 게시판 ===== -->
+    <section class="section section--alt" id="board">
+      <div class="wrap">
+        <header class="section__head section__head--row">
+          <div>
+          </div>
+          <button class="btn btn--accent" type="button" id="writeBtn">글쓰기</button>
+        </header>
+
+        <div class="board-tools">
+          <div class="chips" id="boardCats" role="tablist" aria-label="게시판 분류"></div>
+          <label class="search">
+            <span class="sr-only">게시글 검색</span>
+            <input id="boardSearch" type="search" placeholder="제목, 내용, 글쓴이 검색">
+          </label>
+        </div>
+
+        <div class="table-scroll">
+          <table class="board-table">
+            <thead>
+              <tr><th scope="col" class="c-no">번호</th><th scope="col" class="c-cat">분류</th><th scope="col">제목</th><th scope="col" class="c-author">글쓴이</th><th scope="col" class="c-date">날짜</th><th scope="col" class="c-views">조회</th></tr>
+            </thead>
+            <tbody id="boardBody"></tbody>
+          </table>
+        </div>
+        <nav class="pager" id="boardPager" aria-label="게시판 페이지"></nav>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== 바닥글 ===== -->
+  <footer class="footer">
+    <div class="wrap footer__in">
+      <div>
+        <strong data-site="name">플레이트 PT 스튜디오</strong>
+        <p class="small muted"><span data-site="address"></span><br>대표전화 <span class="mono" data-site="phone"></span></p>
+      </div>
+      <p class="small muted">© <span id="year"></span> <span data-site="name"></span><br>사진: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
+    </div>
+  </footer>
+
+  <!-- 게시판: 글쓰기 창 -->
+  <dialog class="modal" id="writeModal" aria-labelledby="writeTitle">
+    <form class="form" id="writeForm" method="dialog" novalidate>
+      <header class="modal__head">
+        <h3 id="writeTitle">글쓰기</h3>
+        <button class="icon-btn" type="button" data-close aria-label="닫기">✕</button>
+      </header>
+      <div class="form__row">
+        <label class="field">
+          <span>분류</span>
+          <select id="wCat" required></select>
+        </label>
+        <label class="field">
+          <span>글쓴이</span>
+          <input id="wAuthor" type="text" maxlength="12" required placeholder="닉네임">
+        </label>
+      </div>
+      <label class="field">
+        <span>제목</span>
+        <input id="wTitle" type="text" maxlength="60" required>
+      </label>
+      <label class="field">
+        <span>내용</span>
+        <textarea id="wBody" rows="7" maxlength="2000" required></textarea>
+      </label>
+      <label class="field">
+        <span>비밀번호 <small class="muted">(글 지울 때 필요, 4자 이상)</small></span>
+        <input id="wPw" type="password" minlength="4" maxlength="20" required autocomplete="new-password">
+      </label>
+      <p class="form__error" id="wError" role="alert"></p>
+      <div class="modal__foot">
+        <button class="btn btn--ghost" type="button" data-close>취소</button>
+        <button class="btn btn--accent" type="submit">등록</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 게시판: 글 보기 창 -->
+  <dialog class="modal modal--wide" id="viewModal" aria-labelledby="viewTitle">
+    <article class="post">
+      <header class="modal__head">
+        <div>
+          <span class="badge" id="vCat"></span>
+          <h3 id="viewTitle"></h3>
+          <p class="small muted" id="vMeta"></p>
+        </div>
+        <button class="icon-btn" type="button" data-close aria-label="닫기">✕</button>
+      </header>
+      <div class="post__body" id="vBody"></div>
+
+      <div class="post__del">
+        <button class="link-btn" type="button" id="delOpen">글 지우기</button>
+        <form class="del-form" id="delForm" hidden>
+          <label class="sr-only" for="delPw">비밀번호</label>
+          <input id="delPw" type="password" placeholder="글 비밀번호" autocomplete="current-password">
+          <button class="btn btn--danger btn--sm" type="submit">지우기</button>
+          <span class="form__error" id="delError" role="alert"></span>
+        </form>
+      </div>
+
+      <section class="comments">
+        <h4>댓글 <span id="vCount" class="mono"></span></h4>
+        <ul class="comments__list" id="vComments"></ul>
+        <form class="comment-form" id="commentForm" novalidate>
+          <label class="sr-only" for="cAuthor">닉네임</label>
+          <input id="cAuthor" type="text" maxlength="12" placeholder="닉네임" required>
+          <label class="sr-only" for="cBody">댓글</label>
+          <input id="cBody" type="text" maxlength="300" placeholder="댓글을 입력하세요" required>
+          <button class="btn btn--accent btn--sm" type="submit">등록</button>
+        </form>
+      </section>
+    </article>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- 스크립트: 설정 → 공통 → 이 페이지 기능 -->
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/mouse.js"></script>
+  <script src="js/board.js"></script>
+</body>
+</html>

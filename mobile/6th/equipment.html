@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>기구 안내 | 플레이트 PT 스튜디오</title>
+  <meta name="description" content="구역별 보유 기구 목록.">
+
+  <!-- 파비콘 -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- 글꼴 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+
+  <!-- 사이트 스타일 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <!-- ===== 머리글 ===== -->
+  <header class="topbar" id="top">
+    <div class="wrap topbar__in">
+      <a class="logo" href="index.html" aria-label="처음 화면으로">
+        <img src="favicon.svg" alt="" width="34" height="34">
+        <span class="logo__name" data-site="short">PLATE PT</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="주 메뉴">
+        <a href="programs.html">프로그램</a>
+        <a href="trainers.html">트레이너</a>
+        <a href="equipment.html">기구</a>
+        <a href="pricing.html">가격</a>
+        <a href="booking.html">예약</a>
+        <a href="location.html">오시는 길</a>
+        <a href="board.html">게시판</a>
+      </nav>
+      <div class="topbar__tools">
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 밝기 바꾸기">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+        </button>
+        <a class="btn btn--accent btn--sm hide-sm" href="booking.html" data-hover="24시간 상담" data-hover-photo="random">상담 예약</a>
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" data-photo="equipment">
+      <div class="page-hero__photo" aria-hidden="true"></div>
+      <div class="wrap page-hero__in">
+        <nav class="crumbs" aria-label="현재 위치"><a href="index.html">처음</a><span aria-hidden="true">/</span><span>기구 안내</span></nav>
+        <h1 class="page-hero__title">구역별 보유 기구</h1>
+      </div>
+    </section>
+
+    <!-- ===== 기구 ===== -->
+    <section class="section" id="equipment">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="section__lead">PT 회원은 수업 외 시간에도 모든 기구를 자유롭게 씁니다. 처음 쓰는 기구는 트레이너가 세팅법을 알려 드립니다.</p>
+        </header>
+        <div class="zone-tabs" role="tablist" id="zoneTabs"></div>
+        <div class="equip" id="equipList" role="tabpanel"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== 바닥글 ===== -->
+  <footer class="footer">
+    <div class="wrap footer__in">
+      <div>
+        <strong data-site="name">플레이트 PT 스튜디오</strong>
+        <p class="small muted"><span data-site="address"></span><br>대표전화 <span class="mono" data-site="phone"></span></p>
+      </div>
+      <p class="small muted">© <span id="year"></span> <span data-site="name"></span><br>사진: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- 스크립트: 설정 → 공통 → 이 페이지 기능 -->
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/mouse.js"></script>
+</body>
+</html>
