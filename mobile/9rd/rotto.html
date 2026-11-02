@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef3ef">
+  <title>로또 번호 생성기</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2925;
+      --muted: #728078;
+      --line: #d7e0da;
+      --paper: #eef3ef;
+      --green: #237359;
+      --lime: #d9ef88;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background: radial-gradient(circle at 12% 18%, rgba(217, 239, 136, 0.42), transparent 25%), radial-gradient(circle at 90% 82%, rgba(139, 218, 196, 0.3), transparent 28%), var(--paper);
+    }
+    main { width: min(100% - 40px, 860px); margin: auto; padding: 46px 0 64px; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 70px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; }
+    .brand-mark { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; background: var(--green); color: white; font-size: 16px; }
+    .edition { color: var(--muted); font: 11px Consolas, monospace; letter-spacing: .08em; }
+    .intro { margin-bottom: 30px; }
+    .eyebrow { margin: 0 0 12px; color: var(--green); font: 700 11px Consolas, monospace; letter-spacing: .12em; }
+    h1 { margin: 0; font-size: clamp(36px, 8vw, 64px); line-height: 1.05; letter-spacing: 0; }
+    .sub { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
+    .toolbar { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin: 0 0 25px; }
+    .count-label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 11px; }
+    #count { font: 700 24px Consolas, monospace; font-variant-numeric: tabular-nums; }
+    .actions { display: flex; gap: 8px; }
+    button { min-height: 46px; padding: 0 18px; border: 1px solid var(--green); border-radius: 5px; background: var(--green); color: white; cursor: pointer; font: inherit; font-size: 13px; font-weight: 800; }
+    button:hover { background: #195e47; }
+    button:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+    #reset { border-color: var(--line); background: transparent; color: var(--ink); }
+    #reset:hover { background: rgba(255,255,255,.55); }
+    .draw-area { min-height: 190px; padding: 27px 24px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.72); box-shadow: 0 12px 32px rgba(34, 65, 50, .06); }
+    .balls { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(8px, 2vw, 17px); }
+    .ball { display: grid; width: clamp(42px, 10vw, 70px); aspect-ratio: 1; place-items: center; border: 1px solid rgba(29,41,37,.1); border-radius: 50%; background: white; color: var(--ink); box-shadow: 0 5px 12px rgba(29,41,37,.13), inset 0 2px 3px rgba(255,255,255,.8); font: 800 clamp(15px, 3vw, 21px) Consolas, monospace; animation: pop .35s ease both; }
+    .ball[data-range="1"] { background: #f0c84d; }
+    .ball[data-range="2"] { background: #8bc6e8; }
+    .ball[data-range="3"] { background: #ee8b72; }
+    .ball[data-range="4"] { background: #a7d27b; }
+    .ball[data-range="5"] { background: #b7a3df; }
+    .ball[data-range="6"] { background: #8bd5bf; }
+    .status { min-height: 20px; margin: 18px 0 0; color: var(--muted); font-size: 12px; text-align: center; }
+    .history { margin-top: 40px; }
+    .history h2 { font-size: 20px; }
+    .history-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .search-panel { padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.72); }
+    .search-panel label { display: block; margin-bottom: 8px; font-size: 12px; }
+    .search-controls { display: flex; gap: 6px; }
+    .search-controls input { width: 100%; min-width: 0; padding: 0 8px; }
+    .search-controls button { min-height: 42px; padding: 0 12px; }
+    .search-message { min-height: 18px; color: var(--muted); font-size: 11px; }
+    .search-result[hidden] { display: none; }
+    .search-result .balls { gap: 5px; }
+    .search-result .ball { width: 38px; font-size: 13px; }
+    .search-result p { color: var(--muted); font-size: 12px; text-align: center; }
+    @media (max-width: 520px) { .history-grid { grid-template-columns: 1fr; } }
+    @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.85); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (max-width: 520px) {
+      main { width: min(100% - 28px, 860px); padding-top: 26px; }
+      header { margin-bottom: 52px; }
+      .toolbar { align-items: start; flex-direction: column; }
+      .actions { width: 100%; }
+      .actions button { flex: 1; }
+      .draw-area { min-height: 150px; padding: 23px 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header><div class="brand"><span class="brand-mark" aria-hidden="true">6</span><span>번호 추첨기</span></div><span class="edition">LOTTO · 1—45</span></header>
+    <section class="intro"><p class="eyebrow">LUCKY NUMBER DRAW</p><h1>오늘의 번호</h1><p class="sub">1부터 45까지, 중복 없이 여섯 개를 뽑아요.</p></section>
+    <section class="toolbar" aria-label="번호 추첨 제어"><div><span class="count-label">생성 횟수</span><strong id="count" aria-live="polite">0회</strong></div><div class="actions"><button id="draw" type="button">번호 뽑기</button><button id="reset" type="button">초기화</button></div></section>
+    <section class="draw-area" aria-label="추첨 결과"><div class="balls" id="balls" aria-live="polite"></div><p class="status" id="status">버튼을 눌러 번호를 뽑아보세요.</p></section>
+    <section class="history"><h2>실제 당첨번호 검색</h2><div class="history-grid">
+      <form class="search-panel" id="round-form"><label for="round">회차별 당첨번호</label><div class="search-controls"><input id="round" type="number" min="1" placeholder="회차"><button>조회</button></div><p class="search-message" id="round-msg">최신 회차 확인 중</p><div class="search-result" id="round-result" hidden><p id="round-date"></p><div class="balls" id="round-balls"></div><p id="bonus"></p></div></form>
+      <form class="search-panel" id="freq-form"><label for="number">번호 출현 횟수 (보너스 제외)</label><div class="search-controls"><input id="number" type="number" min="1" max="45" placeholder="1~45"><button>검색</button></div><p class="search-message" id="freq-msg">1회차부터 전체 이력을 검색합니다.</p><div class="search-result" id="freq-result" hidden><div class="balls"><span class="ball" id="freq-ball"></span></div><p id="freq-count"></p></div></form>
+    </div></section>
+  </main>
+  <script>
+    const balls = document.querySelector("#balls");
+    const count = document.querySelector("#count");
+    const status = document.querySelector("#status");
+    let draws = 0;
+
+    document.querySelector("#draw").addEventListener("click", () => {
+      const numbers = Array.from({ length: 45 }, (_, i) => i + 1);
+      for (let i = 0; i < 6; i += 1) {
+        const j = i + Math.floor(Math.random() * (45 - i));
+        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+      }
+      balls.replaceChildren(...numbers.slice(0, 6).sort((a, b) => a - b).map((number, i) => {
+        const ball = document.createElement("span");
+        ball.className = "ball";
+        ball.dataset.range = Math.ceil(number / 10);
+        ball.style.animationDelay = `${i * 45}ms`;
+        ball.textContent = String(number).padStart(2, "0");
+        return ball;
+      }));
+      count.textContent = `${++draws}회`;
+      status.textContent = "행운의 번호를 뽑았습니다.";
+    });
+
+    document.querySelector("#reset").addEventListener("click", () => {
+      draws = 0;
+      count.textContent = "0회";
+      balls.replaceChildren();
+      status.textContent = "버튼을 눌러 번호를 뽑아보세요.";
+    });
+
+    const api = "https://www.dhlottery.co.kr/lt645";
+    const roundInput = document.querySelector("#round");
+    let latestRound;
+    const latest = fetch(`${api}/selectLtEpsdInfo.do`).then(r => r.json()).then(d => {
+      latestRound = Number(d.data.list[0].ltEpsd);
+      roundInput.max = latestRound;
+      roundInput.placeholder = `1~${latestRound}회`;
+      document.querySelector("#round-msg").textContent = `현재 ${latestRound}회까지 조회 가능`;
+    }).catch(() => document.querySelector("#round-msg").textContent = "최신 회차 조회 실패");
+    function addBall(target, value) {
+      const ball = document.createElement("span");
+      ball.className = "ball";
+      ball.dataset.range = Math.ceil(value / 10);
+      ball.textContent = String(value).padStart(2, "0");
+      target.append(ball);
+    }
+    document.querySelector("#round-form").addEventListener("submit", async e => {
+      e.preventDefault(); await latest;
+      const n = Number(roundInput.value), msg = document.querySelector("#round-msg"), out = document.querySelector("#round-result");
+      if (!Number.isInteger(n) || n < 1 || n > latestRound) { msg.textContent = `1~${latestRound || "최신"}회차 입력`; out.hidden = true; return; }
+      msg.textContent = "조회 중...";
+      try {
+        const d = await (await fetch(`${api}/selectPstLt645InfoNew.do?srchDir=center&srchLtEpsd=${n}`)).json();
+        const x = d.data.list.find(v => Number(v.ltEpsd) === n);
+        if (!x) throw Error();
+        const row = document.querySelector("#round-balls"); row.replaceChildren();
+        [x.tm1WnNo,x.tm2WnNo,x.tm3WnNo,x.tm4WnNo,x.tm5WnNo,x.tm6WnNo].forEach(v => addBall(row, Number(v)));
+        document.querySelector("#round-date").textContent = `${n}회 · ${x.ltRflYmd.slice(0,4)}.${x.ltRflYmd.slice(4,6)}.${x.ltRflYmd.slice(6)}`;
+        const bonus = document.querySelector("#bonus"); bonus.replaceChildren(document.createTextNode("보너스 ")); addBall(bonus, Number(x.bnsWnNo));
+        out.hidden = false; msg.textContent = "동행복권 공식 결과";
+      } catch { msg.textContent = "회차 결과를 불러오지 못했습니다."; }
+    });
+    let frequency;
+    document.querySelector("#freq-form").addEventListener("submit", async e => {
+      e.preventDefault();
+      const n = Number(document.querySelector("#number").value), msg = document.querySelector("#freq-msg"), out = document.querySelector("#freq-result");
+      if (!Number.isInteger(n) || n < 1 || n > 45) { msg.textContent = "1~45 번호 입력"; out.hidden = true; return; }
+      msg.textContent = "검색 중...";
+      try {
+        frequency ||= fetch(`${api}/selectLt645NoStats.do?srchStrLtEpsd=&srchEndLtEpsd=&srchBnsYn=N`).then(r => r.json()).then(d => d.data.result);
+        const rows = await frequency; await latest;
+        const times = rows.find(x => Number(x.wnNo) === n).cnt, ball = document.querySelector("#freq-ball");
+        ball.dataset.range = Math.ceil(n / 10); ball.textContent = String(n).padStart(2, "0");
+        document.querySelector("#freq-count").textContent = `${times}회 · ${latestRound}회 기준`;
+        out.hidden = false; msg.textContent = "동행복권 공식 통계";
+      } catch { msg.textContent = "통계를 불러오지 못했습니다."; }
+    });
+  </script>
+</body>
+</html>
