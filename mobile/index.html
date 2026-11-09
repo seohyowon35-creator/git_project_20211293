@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#e3ece9" />
+    <title>계산기</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="calculator.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell" id="app-shell">
+      <section class="calculator" aria-label="계산기">
+        <header class="top-bar">
+          <div class="title-group">
+            <span class="app-mark" aria-hidden="true">=</span>
+            <div><p class="eyebrow">계산기</p><h1>표준</h1></div>
+          </div>
+          <div class="header-actions">
+            <button class="icon-button" type="button" data-action="toggle-panel" data-panel="history" aria-label="계산 기록 열기" aria-pressed="false" title="계산 기록">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5v5h5M5.2 9a7.5 7.5 0 1 1-.2 5M12 7v5l3 2" /></svg>
+            </button>
+            <button class="icon-button" type="button" data-action="toggle-panel" data-panel="memory" aria-label="메모리 열기" aria-pressed="false" title="메모리">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V6h14v13M8 9h8M8 12h8M8 15h5" /></svg>
+            </button>
+          </div>
+        </header>
+        <div class="display" aria-live="polite" aria-atomic="true">
+          <p class="expression" id="expression"></p>
+          <output class="result" id="result" aria-label="결과">0</output>
+        </div>
+        <div class="memory-row" aria-label="메모리 기능">
+          <button type="button" data-action="memory-clear" disabled>MC</button>
+          <button type="button" data-action="memory-recall" disabled>MR</button>
+          <button type="button" data-action="memory-add">M+</button>
+          <button type="button" data-action="memory-subtract">M−</button>
+          <button type="button" data-action="memory-store">MS</button>
+        </div>
+        <div class="keypad" aria-label="숫자 및 연산 키패드">
+          <button class="key function-key" type="button" data-action="percent">%</button>
+          <button class="key function-key" type="button" data-action="clear-entry">CE</button>
+          <button class="key function-key" type="button" data-action="clear">C</button>
+          <button class="key function-key" type="button" data-action="backspace" aria-label="지우기" title="지우기">⌫</button>
+          <button class="key function-key" type="button" data-action="reciprocal" aria-label="역수">1/x</button>
+          <button class="key function-key" type="button" data-action="square" aria-label="제곱">x²</button>
+          <button class="key function-key" type="button" data-action="square-root" aria-label="제곱근">√x</button>
+          <button class="key operator-key" type="button" data-action="operator" data-operator="÷" aria-label="나누기">÷</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="7">7</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="8">8</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="9">9</button>
+          <button class="key operator-key" type="button" data-action="operator" data-operator="×" aria-label="곱하기">×</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="4">4</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="5">5</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="6">6</button>
+          <button class="key operator-key" type="button" data-action="operator" data-operator="−" aria-label="빼기">−</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="1">1</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="2">2</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="3">3</button>
+          <button class="key operator-key" type="button" data-action="operator" data-operator="+" aria-label="더하기">+</button>
+          <button class="key function-key" type="button" data-action="sign" aria-label="부호 바꾸기">+/−</button>
+          <button class="key number-key" type="button" data-action="digit" data-value="0">0</button>
+          <button class="key number-key" type="button" data-action="decimal">.</button>
+          <button class="key equals-key" type="button" data-action="equals" aria-label="같음">=</button>
+        </div>
+      </section>
+      <aside class="side-panel" id="side-panel" aria-label="계산기 보조 패널" hidden>
+        <div class="panel-heading">
+          <div class="panel-tabs" role="tablist" aria-label="보조 패널">
+            <button type="button" class="panel-tab is-active" role="tab" data-panel-tab="history" aria-selected="true">기록</button>
+            <button type="button" class="panel-tab" role="tab" data-panel-tab="memory" aria-selected="false">메모리</button>
+          </div>
+          <button class="icon-button close-button" type="button" data-action="close-panel" aria-label="패널 닫기" title="닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+        </div>
+        <section class="panel-content" id="history-content" role="tabpanel" aria-label="계산 기록">
+          <div class="panel-empty" id="history-empty">아직 계산 기록이 없습니다.</div>
+          <ol class="history-list" id="history-list"></ol>
+          <button class="text-button" type="button" data-action="clear-history" id="clear-history" hidden>기록 지우기</button>
+        </section>
+        <section class="panel-content memory-content" id="memory-content" role="tabpanel" aria-label="메모리" hidden>
+          <div class="panel-empty" id="memory-empty">저장된 메모리가 없습니다.</div>
+          <ol class="memory-list" id="memory-list"></ol>
+        </section>
+      </aside>
+    </main>
+  </body>
+</html>
